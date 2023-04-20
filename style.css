@@ -1,3 +1,4 @@
+
 html {
     box-sizing: border-box;
   }
@@ -8,31 +9,57 @@ html {
   }
   
   header {
+
+html{
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+}
+header {
+
     display: flex;
     justify-content: space-around;
     align-items: center;
     background-color: #A6D0DD;
     color: #fff;
+
     padding: 10px;
     font-family: 'Roboto', sans-serif;
   }
   
+
+    padding: 20px;
+    font-family: 'Roboto', sans-serif;
+  }
+
   header h1 {
     font-size: 36px;
     margin: 0;
   }
+
   
+
+
   header nav ul {
     display: flex;
     list-style: none;
     margin: 0;
     padding: 0;
   }
+
   
   header nav ul li {
     margin-left: 10px;
   }
   
+
+  header nav ul li {
+    margin-left: 20px;
+  }
+
   header nav ul li a {
     color: #fff;
     text-decoration: none;
@@ -41,12 +68,18 @@ html {
     transition: all 0.3s ease-in-out;
   }
   
+
+
   header nav ul li a:hover {
     color: #ffcc00;
   }
   
+
   main {
     margin-top: -20px;
+
+main{
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -56,6 +89,7 @@ html {
     color: #333;
     padding: 50px;
     font-family: 'Roboto', sans-serif;
+
   }
   
   table thead th {
@@ -65,10 +99,24 @@ html {
   }
   
   form {
+=======
+}
+
+
+table thead th{
+    width:150px;
+    text-align: left;
+    padding-bottom: 10px;
+
+}
+
+form{
+
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
     margin-top: 20px;
   }
   
@@ -86,6 +134,18 @@ html {
   }
   
   footer {
+=======
+}
+
+form input, form select{
+    width: 300px;
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid #ccc;
+}
+
+footer {
+
     background-color: #A6D0DD;
     color: #fff;
     padding: 20px;
@@ -104,4 +164,20 @@ html {
   .card {
     border: 1px black solid;
     border-radius: 15px;
+
+  
+  
+  
+  
+  #renderDiv {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap:3rem;
+    text-align: center;
+    margin: 2rem;
+  }
+  .card {
+      border:1px black solid;
+      border-radius: 15px;
+
   }
