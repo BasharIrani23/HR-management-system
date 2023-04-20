@@ -2,8 +2,7 @@
 <html>
     <head>
         <title>Employee Information</title>
-        <style>
-        </style>
+        <link rel="stylesheet" href="./style.css">
       </head>
   <body>
     <header>
@@ -15,35 +14,51 @@
         </ul>
       </nav>
     </header>
+
+    <div id="renderDiv">
+
+    </div>
     <main>
       <table class="employees_table">
         <thead>
-            <tr>
-              <th>Employee ID</th>
-              <th>Full Name</th>
-              <th>Department</th>
-              <th>Level</th>
-            </tr>
+          <tr>
+            <th><h1>Form</h1></th>
+          </tr>
         </thead>
-        <tbody>
-            <!-- <tr>
-              <td>Alfreds Futterkiste</td>
-              <td>Maria Anders</td>
-              <td>Germany</td>
-              <td>Germany</td>
-            </tr> -->
-        </tbody>
-    </table>
-    
-    </main>
-
-    <footer id="my-footer">
+      </table>
+      <form id="addform"> 
+        <label for="fullname">Fullname:</label>
+        <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required>
+      <label for="department">Department:</label>
+      <select id="department" name="department" required>
+      <option value="">Select a department</option>
+      <option value="administration">Administration</option>
+      <option value="marketing">Marketing</option>
+      <option value="development">Development</option>
+      <option value="finance">Finance</option>
+      </select>
       
+      <label for="level">Level:</label>
+      <select id="level" name="level" required>
+      <option value="">Select a level</option>
+      <option value="Junior">Junior</option>
+      <option value="Mid-Senior">Mid-Senior</option>
+      <option value="Senior">Senior</option>
+      </select>
+      
+      <label for="img_url">Image URL:</label>
+      <input type="text" id="img_url" name="img_url" placeholder="Enter the URL of your image" required>
+      
+      <button type="submit">Submit</button>
+      
+      </form>
+    </main>
+    <footer id="my-footer">
       <a href="https://twitter.com">
         <img src="twitter-icon.png" alt="Twitter"> </a>
         <a href="https://facebook.com">
           <img src="facebook-icon.png" alt="facebook">  </a>
-          
+          <div class = "fb-pic" ></div>
 
         <p>&copy; All rights reserved 2023.</p>
       </a>
