@@ -131,6 +131,36 @@ Employee.prototype.renderInHomePage = function () {
   mainDiv.append(card);
 };
 
+
+employee_1.calcSalary();
+employee_1.renderInHomePage();
+
+employee_2.calcSalary();
+employee_2.renderInHomePage();
+
+employee_3.calcSalary();
+employee_3.renderInHomePage();
+
+employee_4.calcSalary();
+employee_4.renderInHomePage();
+
+employee_5.calcSalary();
+employee_5.renderInHomePage();
+
+employee_6.calcSalary();
+employee_6.renderInHomePage();
+
+employee_7.calcSalary();
+employee_7.renderInHomePage();
+
+const form=document.getElementById("addform");
+// Creat new employee from form
+
+function uniqID(){
+  return Math.floor(1000 + Math.random() * 9000);
+  }
+=======
+
 employee_1.calcSalary();
 employee_1.renderInHomePage();
 
@@ -153,4 +183,22 @@ employee_7.calcSalary();
 employee_7.renderInHomePage();
 
 
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault()
+
+
+  let fullname = e.target.fullname.value
+  let image = e.target.img_url.value
+  const dept = department[e.target.department.value]
+  const level = e.target.level.value
+  
+  let newEmploee = new Employee(uniqID(), fullname, dept, level, image)
+  
+  newEmploee.calcSalary()
+  console.log(newEmploee);
+  newEmploee.renderInHomePage()
+  
+})
+=======
 
