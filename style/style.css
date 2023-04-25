@@ -52,7 +52,6 @@ html {
     justify-content: center;
     flex-direction: column;
     min-height: calc(100vh - 200px);
-    background-color: #fff;
     color: #333;
     padding: 50px;
     font-family: 'Roboto', sans-serif;
@@ -121,4 +120,21 @@ html {
   width: 25px;
   height: 25px;
   object-fit: cover;
+}
+
+
+#accounting {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#accounting td, #accounting th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+#accounting tr:nth-child(even) {
+  background-color: #dddddd;
 }

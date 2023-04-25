@@ -16,9 +16,23 @@ savedEmployees.forEach((employee, index) => {
     totals[employee.department].averageSalary = totals[employee.department].totalSalaryOfDepartment / totals[employee.department].totalEmployees
 });
 
+const accoutingTable = document.querySelector('#accounting tfoot')
+let htmlResult = "";
+
 Object.keys(totals).forEach((department, index)=>{
     totals[department].totalSalary = totalSalary
+
+     htmlResult += `
+        <tr>
+            <td>${department}</td>
+            <td>${totals[department].totalEmployees}</td>
+            <td>${totals[department].totalSalary}</td>
+            <td>${totals[department].averageSalary}</td>
+        </tr>
+    `
 })
+
+accoutingTable.innerHTML = htmlResult
 
 
 console.log(totals);
