@@ -6,7 +6,6 @@ html {
     margin: 0;
     padding: 0;
   }
-   
   
   header {
     display: flex;
@@ -105,4 +104,10 @@ html {
   .card {
     border: 1px black solid;
     border-radius: 15px;
+  }
+
+  .card img{
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
   }

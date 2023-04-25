@@ -1,3 +1,6 @@
+const LOCAL_STORAGE_EMPLOYEES_KEY = 'employees';
+const savedEmployees = JSON.parse(localStorage.getItem(LOCAL_STORAGE_EMPLOYEES_KEY)?? "[]")
+
 function randomIntFromInterval(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
@@ -116,6 +119,8 @@ Employee.prototype.calcSalary = function () {
 
 Employee.prototype.renderInHomePage = function () {
   const mainDiv = document.getElementById("renderDiv");
+  const defaultImage = "https://st3.depositphotos.com/9998432/13335/v/600/depositphotos_133351928-stock-illustration-default-placeholder-man-and-woman.jpg"
+
 
   const card = document.createElement("div");
   card.className="card";
@@ -124,13 +129,33 @@ Employee.prototype.renderInHomePage = function () {
   const name = document.createElement("h2");
   name.innerText = this.full_name;
 
+  const img = document.createElement("img");
+  img.setAttribute('src', this.image ?? defaultImage) 
+
   const salary = document.createElement("h4");
   salary.innerText =` Salary: ${this.salary}`;
 
-  card.append(name,salary);
+  card.append(name,img,salary);
   mainDiv.append(card);
 };
 
+
+
+// Load saved employees on first load
+if(savedEmployees.length){
+  savedEmployees.forEach((employee, index)=>{
+    employee = new Employee(
+      employee.employee_id,
+      employee.full_name,
+      employee.department,
+      employee.level,
+      employee.image,
+      employee.salary,
+    )
+  employee.calcSalary();
+  employee.renderInHomePage();
+  })
+}
 
 employee_1.calcSalary();
 employee_1.renderInHomePage();
@@ -153,6 +178,7 @@ employee_6.renderInHomePage();
 employee_7.calcSalary();
 employee_7.renderInHomePage();
 
+
 const form=document.getElementById("addform");
 // Creat new employee from form
 
@@ -174,8 +200,8 @@ form.addEventListener('submit', (e) => {
   newEmploee.calcSalary()
   console.log(newEmploee);
   newEmploee.renderInHomePage()
-  
-})
 
+  localStorage.setItem(LOCAL_STORAGE_EMPLOYEES_KEY, JSON.stringify([newEmploee, ...savedEmployees]))
+})
 
 
