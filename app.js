@@ -189,6 +189,7 @@ function uniqID(){
 form.addEventListener('submit', (e) => {
   e.preventDefault()
 
+
   let fullname = e.target.fullname.value
   let image = e.target.img_url.value
   const dept = department[e.target.department.value]
