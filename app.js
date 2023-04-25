@@ -119,6 +119,8 @@ Employee.prototype.calcSalary = function () {
 
 Employee.prototype.renderInHomePage = function () {
   const mainDiv = document.getElementById("renderDiv");
+  const defaultImage = "https://st3.depositphotos.com/9998432/13335/v/600/depositphotos_133351928-stock-illustration-default-placeholder-man-and-woman.jpg"
+
 
   const card = document.createElement("div");
   card.className="card";
@@ -127,10 +129,13 @@ Employee.prototype.renderInHomePage = function () {
   const name = document.createElement("h2");
   name.innerText = this.full_name;
 
+  const img = document.createElement("img");
+  img.setAttribute('src', this.image ?? defaultImage) 
+
   const salary = document.createElement("h4");
   salary.innerText =` Salary: ${this.salary}`;
 
-  card.append(name,salary);
+  card.append(name,img,salary);
   mainDiv.append(card);
 };
 

@@ -105,3 +105,9 @@ html {
     border: 1px black solid;
     border-radius: 15px;
   }
+
+  .card img{
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+  }
