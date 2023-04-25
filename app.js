@@ -117,7 +117,7 @@ Employee.prototype.calcSalary = function () {
   console.log("salary after", this.salary);
 };
 
-Employee.prototype.renderInHomePage = function (preappend = false) {
+Employee.prototype.renderInHomePage = function () {
   const mainDiv = document.getElementById("renderDiv");
 
   const card = document.createElement("div");
