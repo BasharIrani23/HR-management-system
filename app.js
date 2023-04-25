@@ -1,3 +1,6 @@
+const LOCAL_STORAGE_EMPLOYEES_KEY = 'employees';
+const savedEmployees = JSON.parse(localStorage.getItem(LOCAL_STORAGE_EMPLOYEES_KEY)?? "[]")
+
 function randomIntFromInterval(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
@@ -114,7 +117,7 @@ Employee.prototype.calcSalary = function () {
   console.log("salary after", this.salary);
 };
 
-Employee.prototype.renderInHomePage = function () {
+Employee.prototype.renderInHomePage = function (preappend = false) {
   const mainDiv = document.getElementById("renderDiv");
 
   const card = document.createElement("div");
@@ -130,6 +133,24 @@ Employee.prototype.renderInHomePage = function () {
   card.append(name,salary);
   mainDiv.append(card);
 };
+
+
+
+// Load saved employees on first load
+if(savedEmployees.length){
+  savedEmployees.forEach((employee, index)=>{
+    employee = new Employee(
+      employee.employee_id,
+      employee.full_name,
+      employee.department,
+      employee.level,
+      employee.image,
+      employee.salary,
+    )
+  employee.calcSalary();
+  employee.renderInHomePage();
+  })
+}
 
 employee_1.calcSalary();
 employee_1.renderInHomePage();
@@ -152,6 +173,7 @@ employee_6.renderInHomePage();
 employee_7.calcSalary();
 employee_7.renderInHomePage();
 
+
 const form=document.getElementById("addform");
 // Creat new employee from form
 
@@ -172,5 +194,8 @@ form.addEventListener('submit', (e) => {
   newEmploee.calcSalary()
   console.log(newEmploee);
   newEmploee.renderInHomePage()
-  
+
+  localStorage.setItem(LOCAL_STORAGE_EMPLOYEES_KEY, JSON.stringify([newEmploee, ...savedEmployees]))
 })
+
+
