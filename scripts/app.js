@@ -1,5 +1,3 @@
-
-
 function Employee(employee_id, full_name, department, level, image, salary) {
   this.employee_id = employee_id;
   this.full_name = full_name;
@@ -13,47 +11,53 @@ const employee_1 = new Employee(
   1000,
   "	Ghazi Samer",
   department.administration,
-  levels.senior.title
+  levels.senior.title,
+  "assets/Gazi.png"
 );
 const employee_2 = new Employee(
   1001,
   "	Lana Ali",
   department.finance,
-  levels.senior.title
+  levels.senior.title,
+  "assets/lana.png"
 );
 const employee_3 = new Employee(
   1002,
   "	Tamara Ayoub",
   department.marketing,
-  levels.senior.title
+  levels.senior.title,
+  "assets/tamara.png"
 );
 const employee_4 = new Employee(
   1003,
   "	Safi Walid",
   department.administration,
-  levels.mid_senior.title
+  levels.mid_senior.title,
+  "assets/safi.png"
 );
 const employee_5 = new Employee(
   1004,
   "	Omar Zaid",
   department.development,
-  levels.senior.title
+  levels.senior.title,
+  "assets/omar.png"
 );
 const employee_6 = new Employee(
   1005,
   "	Rana Saleh",
   department.development,
-  levels.junior.title
+  levels.junior.title,
+  "assets/rana.png"
 );
 const employee_7 = new Employee(
   1006,
   "	Hadi Ahmad",
   department.finance,
-  levels.mid_senior.title
+  levels.mid_senior.title,
+  "assets/hadi.jpg"
 );
 
 Employee.prototype.calcSalary = function () {
-  console.log("level", this.level);
   switch (this.level) {
     case "Junior":
       this.salary = randomIntFromInterval(
@@ -74,7 +78,7 @@ Employee.prototype.calcSalary = function () {
       );
       break;
   }
-  console.log("salary before", this.salary);
+
   const calcTaxes = this.salary * (TAX / 100);
   // salary after tax
   this.salary = this.salary - calcTaxes;
@@ -83,89 +87,98 @@ Employee.prototype.calcSalary = function () {
 
 Employee.prototype.renderInHomePage = function () {
   const mainDiv = document.getElementById("renderDiv");
-  const defaultImage = "https://st3.depositphotos.com/9998432/13335/v/600/depositphotos_133351928-stock-illustration-default-placeholder-man-and-woman.jpg"
-
+  //const defaultImage = "assets/1.jpg";
 
   const card = document.createElement("div");
-  card.className="card";
-
+  card.className = "card";
 
   const name = document.createElement("h2");
   name.innerText = this.full_name;
 
+  const department = document.createElement("h3");
+  department.innerText = this.department;
+
   const img = document.createElement("img");
-  img.setAttribute('src', this.image ?? defaultImage) 
+  img.setAttribute("src", this.image);
+
+  console.log(this);
 
   const salary = document.createElement("h4");
-  salary.innerText =` Salary: ${this.salary}`;
+  salary.innerText = ` Salary: ${this.salary}`;
 
-  card.append(name,img,salary);
+  card.append(name, department, img, salary);
   mainDiv.append(card);
 };
 
-
-
 // Load saved employees on first load
-if(savedEmployees.length){
-  savedEmployees.forEach((employee, index)=>{
+if (savedEmployees.length) {
+  savedEmployees.forEach((employee, index) => {
     employee = new Employee(
       employee.employee_id,
       employee.full_name,
       employee.department,
       employee.level,
       employee.image,
-      employee.salary,
-    )
-  employee.calcSalary();
-  employee.renderInHomePage();
-  })
+      employee.salary
+    );
+    employee.renderInHomePage();
+  });
 }
 
-employee_1.calcSalary();
-employee_1.renderInHomePage();
-
-employee_2.calcSalary();
-employee_2.renderInHomePage();
-
-employee_3.calcSalary();
-employee_3.renderInHomePage();
-
-employee_4.calcSalary();
-employee_4.renderInHomePage();
-
-employee_5.calcSalary();
-employee_5.renderInHomePage();
-
-employee_6.calcSalary();
-employee_6.renderInHomePage();
-
-employee_7.calcSalary();
-employee_7.renderInHomePage();
-
-
-const form=document.getElementById("addform");
+const form = document.getElementById("addform");
 // Creat new employee from form
 
-function uniqID(){
+function uniqID() {
   return Math.floor(1000 + Math.random() * 9000);
+}
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  let fullname = e.target.fullname.value;
+  let image = e.target.img_url.value;
+  const dept = department[e.target.department.value];
+  const level = e.target.level.value;
+
+  let newEmploee = new Employee(uniqID(), fullname, dept, level, image);
+
+  newEmploee.calcSalary();
+  newEmploee.renderInHomePage();
+
+  localStorage.setItem(
+    LOCAL_STORAGE_EMPLOYEES_KEY,
+    JSON.stringify([newEmploee, ...savedEmployees])
+  );
+});
+
+const empArr = [
+  employee_1,
+  employee_2,
+  employee_3,
+  employee_4,
+  employee_5,
+  employee_6,
+  employee_7,
+];
+const allUsersHaveBeenAdded = localStorage.getItem("ALL_USER_ADDED");
+
+if (!allUsersHaveBeenAdded) {
+  for (let i = 0; i < empArr.length; i++) {
+    empArr[i].calcSalary();
+    empArr[i].renderInHomePage();
+
+    const allEmployee = localStorage.getItem(LOCAL_STORAGE_EMPLOYEES_KEY)
+      ? JSON.parse(localStorage.getItem(LOCAL_STORAGE_EMPLOYEES_KEY))
+      : [];
+    allEmployee.push(empArr[i]);
+
+    localStorage.setItem(
+      LOCAL_STORAGE_EMPLOYEES_KEY,
+      JSON.stringify(allEmployee)
+    );
+
+    if (empArr.length === i + 1) {
+      localStorage.setItem("ALL_USER_ADDED", "true");
+    }
   }
-
-form.addEventListener('submit', (e) => {
-  e.preventDefault()
-
-
-  let fullname = e.target.fullname.value
-  let image = e.target.img_url.value
-  const dept = department[e.target.department.value]
-  const level = e.target.level.value
-  
-  let newEmploee = new Employee(uniqID(), fullname, dept, level, image)
-  
-  newEmploee.calcSalary()
-  console.log(newEmploee);
-  newEmploee.renderInHomePage()
-
-  localStorage.setItem(LOCAL_STORAGE_EMPLOYEES_KEY, JSON.stringify([newEmploee, ...savedEmployees]))
-})
-
-
+}
