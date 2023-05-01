@@ -35,6 +35,7 @@ Object.keys(totals).forEach((department, index)=>{
 accoutingTable.innerHTML = htmlResult
 
 
+
 console.log(totals);
 
 
