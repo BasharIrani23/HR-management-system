@@ -93,15 +93,13 @@ Employee.prototype.renderInHomePage = function () {
   card.className = "card";
 
   const name = document.createElement("h2");
-  name.innerText = this.full_name;
+  name.innerText = this.employee_id + " - " + this.full_name;
 
   const department = document.createElement("h3");
-  department.innerText = this.department;
+  department.innerText = this.department + " - " + this.level;
 
   const img = document.createElement("img");
   img.setAttribute("src", this.image);
-
-  console.log(this);
 
   const salary = document.createElement("h4");
   salary.innerText = ` Salary: ${this.salary}`;
@@ -124,32 +122,6 @@ if (savedEmployees.length) {
     employee.renderInHomePage();
   });
 }
-
-const form = document.getElementById("addform");
-// Creat new employee from form
-
-function uniqID() {
-  return Math.floor(1000 + Math.random() * 9000);
-}
-
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-
-  let fullname = e.target.fullname.value;
-  let image = e.target.img_url.value;
-  const dept = department[e.target.department.value];
-  const level = e.target.level.value;
-
-  let newEmploee = new Employee(uniqID(), fullname, dept, level, image);
-
-  newEmploee.calcSalary();
-  newEmploee.renderInHomePage();
-
-  localStorage.setItem(
-    LOCAL_STORAGE_EMPLOYEES_KEY,
-    JSON.stringify([newEmploee, ...savedEmployees])
-  );
-});
 
 const empArr = [
   employee_1,
@@ -177,8 +149,38 @@ if (!allUsersHaveBeenAdded) {
       JSON.stringify(allEmployee)
     );
 
+    savedEmployees.push(empArr[i]);
+
     if (empArr.length === i + 1) {
       localStorage.setItem("ALL_USER_ADDED", "true");
     }
   }
 }
+
+const form = document.getElementById("addform");
+// Creat new employee from form
+
+function uniqID() {
+  return Math.floor(1000 + Math.random() * 9000);
+}
+console.log(savedEmployees);
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  let fullname = e.target.fullname.value;
+  let image = e.target.img_url.value;
+  const dept = department[e.target.department.value];
+  const level = e.target.level.value;
+
+  let newEmploee = new Employee(uniqID(), fullname, dept, level, image);
+
+  newEmploee.calcSalary();
+  newEmploee.renderInHomePage();
+
+  savedEmployees.push(newEmploee);
+  localStorage.setItem(
+    LOCAL_STORAGE_EMPLOYEES_KEY,
+    JSON.stringify([...savedEmployees])
+  );
+});

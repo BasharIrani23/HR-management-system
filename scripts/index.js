@@ -1,6 +1,7 @@
-const LOCAL_STORAGE_EMPLOYEES_KEY = 'employees';
-const savedEmployees = JSON.parse(localStorage.getItem(LOCAL_STORAGE_EMPLOYEES_KEY)?? "[]")
-
+const LOCAL_STORAGE_EMPLOYEES_KEY = "employees";
+const savedEmployees = JSON.parse(
+  localStorage.getItem(LOCAL_STORAGE_EMPLOYEES_KEY) ?? "[]"
+);
 
 const TAX = 7.5;
 const levels = {
@@ -37,4 +38,3 @@ const department = {
 function randomIntFromInterval(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
-
